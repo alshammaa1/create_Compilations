@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج طلب مسابقة eCopon</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e3e4e8);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #fefefe;
+            color: #333333;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header img {
+            height: 70px;
+        }
+
+        footer {
+            background-color: #225884;
+            color: #FFFFFF;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 16px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .form-container {
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .form-group button {
+            background-color: #4CAF50;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        table, th, td {
+            border: 1px solid #dddddd;
+            box-sizing: border-box;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: right;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .action-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-buttons .add-row,
+        .action-buttons .delete-row {
+            background-color: #007BFF;
+            color: #FFFFFF;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-buttons .delete-row {
+            background-color: #FF4136;
+        }
+
+        .action-buttons .add-row:hover {
+            background-color: #0056b3;
+        }
+
+        .action-buttons .delete-row:hover {
+            background-color: #c30000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://e-copon.com/site/themes/ecopoun/assets/img/logo-dark.png" alt="شعار eCopon">
+    </header>
+    <div class="form-container">
+        <h1>إنشاء طلب مسابقة</h1>
+        <form>
+            <!-- معلومات الشركة -->
+            <div class="form-group">
+                <label for="company-name">اسم الشركة:</label>
+                <input type="text" id="company-name" name="company-name" placeholder="أدخل اسم الشركة" required>
+            </div>
+            <div class="form-group">
+                <label for="commercial-registration">رقم السجل التجاري:</label>
+                <input type="text" id="commercial-registration" name="commercial-registration" placeholder="أدخل رقم السجل التجاري" required>
+            </div>
+
+            <!-- معلومات الحملة -->
+            <div class="form-group">
+                <label for="campaign-name">اسم الحملة:</label>
+                <input type="text" id="campaign-name" name="campaign-name" placeholder="أدخل اسم الحملة" required>
+            </div>
+            <div class="form-group">
+                <label for="start-date">تاريخ البدء:</label>
+                <input type="date" id="start-date" name="start-date" required>
+            </div>
+            <div class="form-group">
+                <label for="end-date">تاريخ الانتهاء:</label>
+                <input type="date" id="end-date" name="end-date" required>
+            </div>
+            <div class="form-group">
+                <label for="campaign-location">موقع الحملة:</label>
+                <select id="campaign-location" name="campaign-location[]" multiple style="width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 5px; font-size: 14px;">
+                    <option value="all-cities">جميع مدن المملكة</option>
+                    <option value="riyadh">الرياض</option>
+                    <option value="jeddah">جدة</option>
+                    <option value="dammam">الدمام</option>
+                    <option value="makkah">مكة المكرمة</option>
+                    <option value="madinah">المدينة المنورة</option>
+                    <option value="khobar">الخبر</option>
+                    <option value="tabuk">تبوك</option>
+                    <option value="abha">أبها</option>
+                    <option value="hail">حائل</option>
+                    <option value="najran">نجران</option>
+                    <option value="jazan">جازان</option>
+                    <option value="al-ahsa">الأحساء</option>
+                    <option value="al-baha">الباحة</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="website-link">رابط الموقع الإلكتروني:</label>
+                <input type="url" id="website-link" name="website-link" placeholder="أدخل رابط الموقع">
+            </div>
+
+            <!-- الكوبونات والسحوبات -->
+            <div class="form-group">
+                <label for="coupons">عدد الكوبونات المطلوبة:</label>
+                <input type="number" id="coupons" name="coupons" min="1" placeholder="أدخل عدد الكوبونات" required>
+            </div>
+            <div class="form-group">
+                <label for="winners">عدد الفائزين:</label>
+                <input type="number" id="winners" name="winners" min="1" placeholder="أدخل عدد الفائزين" required>
+            </div>
+            <div class="form-group">
+                <label for="draws">عدد السحوبات:</label>
+                <input type="number" id="draws" name="draws" min="1" placeholder="أدخل عدد السحوبات" required>
+            </div>
+            <div class="form-group">
+                <label for="draw-location">مكان السحب:</label>
+                <input type="text" id="draw-location" name="draw-location" placeholder="أدخل مكان السحب" required>
+            </div>
+
+            <!-- تفاصيل الجوائز -->
+            <div class="form-group">
+                <label>تفاصيل الجوائز:</label>
+                <div class="table-container">
+                    <table id="prize-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الجائزة</th>
+                                <th>وصف الجائزة</th>
+                                <th>عدد الجوائز</th>
+                                <th>قيمة الجائزة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="prize-name[]" placeholder="أدخل اسم الجائزة" required></td>
+                                <td><input type="text" name="prize-description[]" placeholder="أدخل وصف الجائزة" required></td>
+                                <td><input type="number" name="prize-number[]" min="1" placeholder="أدخل العدد" required></td>
+                                <td><input type="text" name="prize-value[]" placeholder="أدخل قيمة الجائزة" required></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="add-row" onclick="addRow('prize-table')">إضافة صف</button>
+                    <button type="button" class="delete-row" onclick="deleteRow('prize-table')">حذف آخر صف</button>
+                </div>
+            </div>
+
+            <!-- توزيع الجوائز حسب تاريخ السحب -->
+            <div class="form-group">
+                <label>توزيع الجوائز حسب تاريخ السحب:</label>
+                <div class="table-container">
+                    <table id="prize-distribution-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الجائزة</th>
+                                <th>تاريخ السحب</th>
+                                <th>عدد الجوائز الموزعة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="distribution-prize-name[]" placeholder="أدخل اسم الجائزة" required></td>
+                                <td><input type="date" name="distribution-draw-date[]" required></td>
+                                <td><input type="number" name="distribution-prize-number[]" min="1" placeholder="أدخل العدد" required></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="add-row" onclick="addRow('prize-distribution-table')">إضافة صف</button>
+                    <button type="button" class="delete-row" onclick="deleteRow('prize-distribution-table')">حذف آخر صف</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="terms">الشروط والأحكام:</label>
+                <textarea id="terms" name="terms" placeholder="أدخل الشروط والأحكام" required></textarea>
+            </div>
+
+            <!-- زر الإرسال -->
+            <div class="form-group">
+                <button type="submit">إرسال الطلب</button>
+            </div>
+
